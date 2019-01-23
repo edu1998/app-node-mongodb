@@ -5,6 +5,15 @@ const E_SERVER = (err) => {
     };
 }
 
+const OK_SERVER = (result) => {
+return {
+    message: "succes execute",
+    code: 200,
+    data: result
+}
+}
+
 module.exports = {
     E_SERVER,
+    OK_SERVER
 }

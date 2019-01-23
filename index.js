@@ -12,9 +12,13 @@ app.use(bodyParser.urlencoded({
 // parse application/json
 app.use(bodyParser.json())
 
-app.use('/crud',routerCrud)
+app.use('/crud',routerCrud);
+
+app.get('/', (req, res) => {
+    res.send("hola CAUSA")
+});
 
 
-app.listen(3000, () => {
-    console.log("Listening port 3000");
+app.listen(8080, () => {
+    console.log("Listening port 8080");
 })
