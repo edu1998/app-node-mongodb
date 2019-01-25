@@ -52,7 +52,6 @@ let insertOne = async (collection, document) => {
 
 }
 
-
 //use insertMany method to insert many document in the collection
 let insertMany = async (collection, documents) => {
     await connect();
@@ -66,10 +65,47 @@ let insertMany = async (collection, documents) => {
 
 }
 
+// search all records in a collection
+let selectAll = async (collection, filter = {}) => {
+    try {
+        await connect();
+        let result = await db.collection(collection).find(filter).toArray();
+        client.close();
+        return resp.OK_SERVER(result)
+    } catch (error) {
+        return resp.E_SERVER(error);
+    }
+}
+
+// search one records in a collection 
+let selectOne = async (collection, filter = {}) => {
+    try {
+        await connect();
+        let result = await db.collection(collection).findOne(filter);
+        client.close();
+        return resp.OK_SERVER(result)
+    } catch (error) {
+        return resp.E_SERVER(error);
+    }
+}
+
+let updateOne = async (collection, filter = {}, operation = {}) => {
+    try {
+        await connect();
+        let result = await db.collection(collection).updateMany(filter,operation);
+        client.close();
+        return resp.OK_SERVER(result)
+    } catch (error) {
+        return resp.E_SERVER(error)
+    }
+}
 
 module.exports = {
+    connect,
     insertMany,
     insertOne,
-    connect,
-    insert
+    insert,
+    selectOne,
+    selectAll,
+    updateOne,
 }

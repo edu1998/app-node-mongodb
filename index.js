@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 app.use('/crud',routerCrud);
 
 app.get('/', (req, res) => {
-    res.send("hola CAUSA")
+    res.send("hola desde mi host local")
 });
 
 
