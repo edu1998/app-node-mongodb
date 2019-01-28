@@ -24,7 +24,7 @@ routerCrud.get('/', async (req, res) => {
 
 routerCrud.put('/', async (req, res) => {
     try {
-        let result = await db.updateOne('personas', {
+        let result = await db.updateMany('personas', {
             name: req.body.namefilter
         }, {
             $set: {

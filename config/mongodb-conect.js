@@ -21,7 +21,6 @@ let connect = async () => {
             useNewUrlParser: true
         });
         db = client.db(dbName);
-        console.log("Server connect");
     } catch (error) {
         console.log("ERROR Server connect");
         return resp.E_SERVER(error)
@@ -92,6 +91,17 @@ let selectOne = async (collection, filter = {}) => {
 let updateOne = async (collection, filter = {}, operation = {}) => {
     try {
         await connect();
+        let result = await db.collection(collection).updateOne(filter,operation);
+        client.close();
+        return resp.OK_SERVER(result)
+    } catch (error) {
+        return resp.E_SERVER(error)
+    }
+}
+
+let updateMany = async (collection, filter = {}, operation = {}) => {
+    try {
+        await connect();
         let result = await db.collection(collection).updateMany(filter,operation);
         client.close();
         return resp.OK_SERVER(result)
@@ -108,4 +118,5 @@ module.exports = {
     selectOne,
     selectAll,
     updateOne,
+    updateMany,
 }
